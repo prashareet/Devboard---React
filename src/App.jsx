@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import AppShell from "./components/layout/AppShell.jsx";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard.jsx";
 import Analytics from "./pages/Analytics.jsx";
@@ -186,6 +186,7 @@ function App() {
       onEditProject={editProject}
     >
       <Routes>
+        <Route path="/" element={<Navigate to="/projects" replace />} />
         <Route
           path="/dashboard"
           element={<Dashboard tasks={tasks} projects={projects} />}
