@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 
 import { FolderKanban, Plus } from "lucide-react";
 
@@ -6,7 +6,13 @@ import ProjectItem from "@/components/Projects/ProjectItem";
 
 import { Button } from "@/components/ui/button";
 
-function Projects({ projects, tasks, onEditProject, onDeleteProject }) {
+function Projects({
+  projects,
+  tasks,
+  onEditProject,
+  onDeleteProject,
+  setIsCreateProjectOpen,
+}) {
   const projectStats = useMemo(() => {
     const stats = new Map();
 
@@ -57,13 +63,11 @@ function Projects({ projects, tasks, onEditProject, onDeleteProject }) {
 
   return (
     <div className="space-y-6 p-6">
-      {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold tracking-tight text-zinc-100">
             Projects
           </h2>
-
           <p className="mt-1 text-sm text-zinc-500">
             Organize your work and keep track of what you're building.
           </p>
@@ -72,7 +76,6 @@ function Projects({ projects, tasks, onEditProject, onDeleteProject }) {
         {projects.length > 0 && (
           <div className="hidden items-center gap-2 rounded-md border border-zinc-800 bg-zinc-900 px-3 py-2 text-xs text-zinc-400 sm:flex">
             <FolderKanban size={14} />
-
             <span>
               {projects.length} {projects.length === 1 ? "project" : "projects"}
             </span>
@@ -80,7 +83,6 @@ function Projects({ projects, tasks, onEditProject, onDeleteProject }) {
         )}
       </div>
 
-      {/* Empty State */}
       {projects.length === 0 ? (
         <section className="flex min-h-[420px] items-center justify-center rounded-lg border border-dashed border-zinc-800 bg-zinc-900/30 px-6">
           <div className="max-w-md text-center">
@@ -97,14 +99,16 @@ function Projects({ projects, tasks, onEditProject, onDeleteProject }) {
               your tasks, and watch your progress take shape.
             </p>
 
-            <Button className="mt-6 gap-2 bg-indigo-600 text-white hover:bg-indigo-500">
+            <Button
+              onClick={() => setIsCreateProjectOpen(true)}
+              className="mt-6 gap-2 bg-indigo-600 text-white hover:bg-indigo-500"
+            >
               <Plus size={16} />
               Create your first project
             </Button>
           </div>
         </section>
       ) : (
-        /* Project Grid */
         <section>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {projects.map((project) => {

@@ -205,6 +205,7 @@ function App() {
               tasks={tasks}
               onEditProject={handleEditProject}
               onDeleteProject={deleteProject}
+              setIsCreateProjectOpen={setIsCreateProjectOpen}
             />
           }
         />
