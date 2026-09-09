@@ -159,21 +159,12 @@ function App() {
   // -------------------------
 
   useEffect(() => {
-    if (!isLoaded) return;
-
     localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks, isLoaded]);
-
-  // -------------------------
-  // SAVE PROJECTS
-  // -------------------------
+  }, [tasks]);
 
   useEffect(() => {
-    if (!isLoaded) return;
-
     localStorage.setItem("projects", JSON.stringify(projects));
-  }, [projects, isLoaded]);
-
+  }, [projects]);
   return (
     <AppShell
       isCreateTaskOpen={isCreateTaskOpen}
